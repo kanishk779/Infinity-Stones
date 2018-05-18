@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<RelativeLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.android.infinity_stones.MainActivity">
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/infinitywar1"
+        android:scaleType="fitXY"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add stone"
+        android:id="@+id/Add_stone"
+        android:textSize="30sp"
+        android:background="@color/colorPrimaryDark"
+        android:layout_centerHorizontal="true"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Reset_button"
+        android:text="Reset List"
+        android:textSize="30sp"
+        android:background="@color/colorPrimaryDark"
+        android:layout_alignParentBottom="true"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@id/Reset_button"
+        android:background="@color/colorPrimaryDark"
+        android:text="see list"
+        android:id="@+id/see_list"
+        android:textSize="30sp" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/stone_teller"
+        android:textSize="30sp"
+        android:layout_below="@id/Add_stone"
+        android:textColor="#f0f948"
+        android:text="hello"
+        android:layout_marginTop="35dp"
+        android:gravity="center_horizontal"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/change_color"
+        android:textSize="30sp"
+        android:background="#ffffff"
+        android:layout_above="@id/Reset_button"
+        android:layout_marginBottom="35dp"
+        android:gravity="center_horizontal"/>
+
+
+</RelativeLayout>
