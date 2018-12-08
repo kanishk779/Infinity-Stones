@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.lang.Math;
+import java.util.*;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -19,39 +19,43 @@ import java.util.Random;
 public class MainActivity extends AppCompatActivity {
 
 
-    //static int selector=6;
-   /* static ArrayList<Integer> list1 = new ArrayList<Integer>();
-    {
-        list1.add(1);
-        list1.add(2);
-        list1.add(3);              //THIS LIST WAS CREATED FOR RANDOMIZING THE STONE PICKED
-        list1.add(4);              // WITHOUT REPETITION, BUT THE APP CRASHES IF I USE THEM
-        list1.add(5);
-        list1.add(6);
-    }*/
-
+    static int selector=5;
+    //static ArrayList<String> list1 = new ArrayList<String>();
+    static ArrayList<String> words=new ArrayList<String>();
+    static ArrayList<String> words1=new ArrayList<String>();
+    String a1 =new String("Power stone-Purple");
+    String a2 =new String("Space stone-Blue");
+    String a4 =new String("Reality stone-Red");
+    String a5 =new String("Soul stone-Orange");
+    String a3 =new String("Time stone-Green");
+    String a6 =new String("Mind stone-Yellow");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        final ArrayList<String> words=new ArrayList<String>();
-        final ArrayList<String> words1=new ArrayList<String>();
+
 
 
         //CREATING ARRAY-LIST OF STONES
-
-
+        /*list1.add("Power stone-Purple");
+        list1.add("Space stone-Blue");
+        list1.add("Time stone-Green");
+        list1.add("Reality stone-Red");
+        list1.add("Soul stone-Orange");
+        list1.add("Mind stone-Yellow");*/
         words.add("Power stone-Purple");
         words.add("Space stone-Blue");
         words.add("Time stone-Green");
         words.add("Reality stone-Red");
         words.add("Soul stone-Orange");
         words.add("Mind stone-Yellow");
+        Collections.shuffle(words);
 
         //CODE FOR SEE_LIST BUTTON
 
 
-        Button See_list_button=(Button)findViewById(R.id.see_list);
+        Button See_list_button=findViewById(R.id.see_list);
         See_list_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -64,19 +68,50 @@ public class MainActivity extends AppCompatActivity {
         //CODE FOR ADD_STONE BUTTON
 
 
-        Button Add_stone_button=(Button)findViewById(R.id.Add_stone);
+        Button Add_stone_button=findViewById(R.id.Add_stone);
         Add_stone_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String message = new String();
+                message="Now you Have No Infinity Stones-Thanos Took Them Away";
+                if(words1.contains(message))
+                {
+                    words1.remove(0);
+                }
                 if(words1.size()<=5){
-                    int x=(int)getRandomIntegerBetweenRange(1,6);
-
-                    words1.add(words.get(x).toString());
-                    TextView change_color_textview = (TextView)findViewById(R.id.change_color);
+                    //int x=(int)getRandomIntegerInRange(5);
+                    String z = new String();
+                    z = giveStone();
+                    words1.add(z);
+                    TextView change_color_textview = findViewById(R.id.change_color);
 
                     //CODE FOR COLOR INDICATOR
 
-                    switch (x+1){
+                    if(z.equals(a1)){
+                        change_color_textview.setText(R.string.imp);
+                        change_color_textview.setTextColor(getResources().getColor(R.color.purple));
+                    }
+                    else if(z.equals(a2)){
+                        change_color_textview.setText(R.string.imp);
+                        change_color_textview.setTextColor(getResources().getColor(R.color.blue));
+                    }
+                    else if(z.equals(a3)){
+                        change_color_textview.setText(R.string.imp);
+                        change_color_textview.setTextColor(getResources().getColor(R.color.green));
+                    }
+                    else if(z.equals(a4)){
+                        change_color_textview.setText(R.string.imp);
+                        change_color_textview.setTextColor(getResources().getColor(R.color.red));
+                    }
+                    else if(z.equals(a5)){
+                        change_color_textview.setText(R.string.imp);
+                        change_color_textview.setTextColor(getResources().getColor(R.color.orange));
+                    }
+                    else if(z.equals(a6)){
+                        change_color_textview.setText(R.string.imp);
+                        change_color_textview.setTextColor(getResources().getColor(R.color.yellow));
+                    }
+                    /*switch (x){
                         case 1:change_color_textview.setText(R.string.imp);
                             change_color_textview.setTextColor(getResources().getColor(R.color.purple));
                                 break;
@@ -95,16 +130,16 @@ public class MainActivity extends AppCompatActivity {
                         case 6:change_color_textview.setText(R.string.imp);
                             change_color_textview.setTextColor(getResources().getColor(R.color.yellow));
                                break;
-                    }
+                    }*/
 
-                    TextView stone_teller_textview= (TextView)findViewById(R.id.stone_teller);
-                    stone_teller_textview.setText("You got " + words.get(x).toString());
+                    TextView stone_teller_textview= findViewById(R.id.stone_teller);
+                    stone_teller_textview.setText("You got " + z);
 
                     Intent i=new Intent(MainActivity.this,Main2Activity.class);
                     i.putStringArrayListExtra("list", words1);
                     startActivity(i);
                 }
-                else if(words1.size()==6){
+                if(words1.size()==6){
                     Context context = getApplicationContext();
                     CharSequence text = "BRAVO!! You Have All The Stones";
                     int duration = Toast.LENGTH_SHORT;
@@ -119,7 +154,7 @@ public class MainActivity extends AppCompatActivity {
         //CODE FOR RESET BUTTON
 
 
-        Button Reset_button=(Button)findViewById(R.id.Reset_button);
+        Button Reset_button=findViewById(R.id.Reset_button);
         Reset_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -127,6 +162,7 @@ public class MainActivity extends AppCompatActivity {
                 for(int i=0;i<no_of_words;i++){
                     words1.remove(0);
                 }
+                //selector=0;
                 words1.add("Now you Have No Infinity Stones-Thanos Took Them Away");
                 Intent i=new Intent(MainActivity.this,Main2Activity.class);
                 i.putStringArrayListExtra("list", words1);
@@ -137,17 +173,37 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-    public static double getRandomIntegerBetweenRange(double min, double max){
+    /*public static double getRandomIntegerBetweenRange(double min, double max){
         double x = (int)(Math.random()*((max-min)+1))+min;
         return x;
+    }*/
+    public static int getRandomIntegerInRange(int n){
+        Random ran = new Random();
+        int nxt = ran.nextInt(n);
+        return (nxt +1);
+    }
+    public static String giveStone(){
+        int ab= words.size();
+        String above = new String();
+        above = words.remove(ab-1);
+        if(words.isEmpty()){
+            words.add("Power stone-Purple");
+            words.add("Space stone-Blue");
+            words.add("Time stone-Green");
+            words.add("Reality stone-Red");
+            words.add("Soul stone-Orange");
+            words.add("Mind stone-Yellow");
+            Collections.shuffle(words);
+        }
+        return above;
     }
   /* public static int abc(){
-       if(selector==1){
+       if(selector==0){
            int x;             //THIS IS THE FUNCTION THAT WOULD PREVENT THE SAME STONE FROM SELECTING
                               //MORE THAN ONCE
            Integer y;
-           x = (int)getRandomIntegerBetweenRange(1,selector);
-           selector=6;
+           x = getRandomIntegerInRange(selector);
+           selector=5;
            y=list1.remove(x);
            {
                list1.add(1);
@@ -162,7 +218,7 @@ public class MainActivity extends AppCompatActivity {
        else{
            int x;
            Integer y;
-           x = (int)getRandomIntegerBetweenRange(1,selector);
+           x = getRandomIntegerInRange(selector);
            selector--;
            y=list1.remove(x);
            return y;
